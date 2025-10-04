@@ -1066,29 +1066,6 @@
             const progressFill = document.getElementById('progressFill');
             const typingContainer = document.getElementById('typingContainer');
             const resultModal = document.getElementById('resultModal');
-        let timeLeft = selectedTime;
-        let timer = null;
-        let isTestActive = false;
-        let currentParagraph = '';
-        let currentIndex = 0;
-        let correctChars = 0;
-        let incorrectChars = 0;
-        let totalCharsTyped = 0;
-        let startTime = null;
-        let errorPositions = new Set();
-        
-        const timeButtons = document.querySelectorAll('.time-btn');
-        const startBtn = document.getElementById('startBtn');
-        const resetBtn = document.getElementById('resetBtn');
-        const inputArea = document.getElementById('inputArea');
-        const textDisplay = document.getElementById('textDisplay');
-        const timeLeftDisplay = document.getElementById('timeLeft');
-        const wpmDisplay = document.getElementById('wpm');
-        const accuracyDisplay = document.getElementById('accuracy');
-        const charCountDisplay = document.getElementById('charCount');
-        const progressFill = document.getElementById('progressFill');
-        const typingContainer = document.getElementById('typingContainer');
-        const resultModal = document.getElementById('resultModal');
         
         // Time selector
         timeButtons.forEach(btn => {
@@ -1327,38 +1304,7 @@
         })();
     </script>
 </body>
-</html>, 1fr);
-            }
-            
-            .typing-container {
-                padding: 25px;
-            }
-            
-            .result-content {
-                padding: 35px 25px;
-            }
-            
-            .result-stats {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .controls {
-                flex-direction: column;
-            }
-            
-            .btn {
-                width: 100%;
-            }
-            
-            .logo-icon {
-                width: 50px;
-                height: 50px;
-            }
-        }
-    </style>
-</head>
+</html>
 <body>
     <div class="floating-shapes">
         <div class="shape"></div>
