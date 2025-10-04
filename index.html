@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypingMaster Pro | Advanced Speed Test</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-secondary: #141933;
+            --bg-tertiary: #1e2544;
+            --accent-primary: #00d9ff;
+            --accent-secondary: #7c3aed;
+            --accent-gradient: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%);
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --success: #10b981;
+            --error: #ef4444;
+            --warning: #f59e0b;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 217, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        .shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            background: var(--accent-primary);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .shape:nth-child(2) {
+            width: 250px;
+            height: 250px;
+            background: var(--accent-secondary);
+            top: 60%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+        
+        .shape:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            background: var(--accent-primary);
+            bottom: 20%;
+            left: 50%;
+            animation-delay: 10s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(30px, -30px) rotate(90deg); }
+            50% { transform: translate(-20px, 20px) rotate(180deg); }
+            75% { transform: translate(40px, 10px) rotate(270deg); }
+        }
+        
+        .container {
+            position: relative;
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 30px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: slideDown 0.8s ease;
+            padding: 0 10px;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .logo-icon {
+            width: 55px;
+            height: 55px;
+            background: var(--accent-gradient);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 10px 40px rgba(0, 217, 255, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            color: var(--text-secondary);
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            font-weight: 400;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 25px;
+            margin-bottom: 25px;
+            flex: 1;
+        }
+        
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 18px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            height: fit-content;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .card:hover::before {
+            opacity: 0.03;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 217, 255, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+        
+        .card-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .time-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .time-btn {
+            padding: 14px 10px;
+            background: var(--bg-tertiary);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .time-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-gradient);
+            transition: left 0.3s ease;
+            z-index: 0;
+        }
+        
+        .time-btn span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .time-btn:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+        
+        .time-btn.active {
+            background: var(--accent-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 8px 20px rgba(0, 217, 255, 0.3);
+        }
+        
+        .time-btn.active::before {
+            left: 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .stat-item {
+            background: var(--bg-tertiary);
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            border-color: rgba(0, 217, 255, 0.2);
+            transform: translateX(3px);
+        }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .typing-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .typing-container {
+            background: var(--bg-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 18px;
+            padding: 30px;
+            min-height: 450px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .typing-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        
+        .typing-container.active::after {
+            transform: scaleX(1);
+        }
+        
+        .progress-bar {
+            height: 3px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--accent-gradient);
+            width: 0%;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px var(--accent-primary);
+        }
+        
+        .text-display {
+            font-family: 'Fira Code', monospace;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            line-height: 2;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            user-select: none;
+            min-height: 160px;
+            letter-spacing: 0.3px;
+            flex: 1;
+        }
+        
+        .text-display span {
+            transition: all 0.05s ease;
+        }
+        
+        .text-display .correct {
+            color: var(--success);
+        }
+        
+        .text-display .incorrect {
+            color: var(--error);
+            background: rgba(239, 68, 68, 0.15);
+            border-radius: 3px;
+            animation: shake 0.3s ease;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            75% { transform: translateX(2px); }
+        }
+        
+        .text-display .current {
+            background: rgba(0, 217, 255, 0.15);
+            border-left: 3px solid var(--accent-primary);
+            animation: blink 1s infinite;
+            padding-left: 2px;
+        }
+        
+        @keyframes blink {
+            0%, 50% { border-color: var(--accent-primary); opacity: 1; }
+            51%, 100% { border-color: transparent; opacity: 0.7; }
+        }
+        
+        .input-area {
+            width: 100%;
+            padding: 18px;
+            font-family: 'Fira Code', monospace;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            background: var(--bg-tertiary);
+            border: 2px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            color: var(--text-primary);
+            outline: none;
+            transition: all 0.3s ease;
+            resize: none;
+            letter-spacing: 0.3px;
+            line-height: 1.6;
+        }
+        
+        .input-area:focus {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 25px rgba(0, 217, 255, 0.15);
+            background: rgba(30, 37, 68, 0.8);
+        }
+        
+        .input-area:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            min-width: 140px;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+        
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 217, 255, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--accent-primary);
+            background: rgba(0, 217, 255, 0.05);
+            transform: translateY(-3px);
+        }
+        
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .result-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .result-content {
+            background: var(--bg-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 25px;
+            max-width: 650px;
+            width: 90%;
+            animation: slideUp 0.5s ease;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .result-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        
+        .result-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 18px;
+            animation: celebrate 0.6s ease;
+        }
+        
+        @keyframes celebrate {
+            0% { transform: scale(0) rotate(0deg); }
+            50% { transform: scale(1.2) rotate(180deg); }
+            100% { transform: scale(1) rotate(360deg); }
+        }
+        
+        .result-content h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+        
+        .result-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        
+        .result-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+        
+        .result-stat {
+            background: var(--bg-tertiary);
+            padding: 22px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .result-stat:hover {
+            transform: translateY(-3px);
+            border-color: rgba(0, 217, 255, 0.2);
+        }
+        
+        .result-stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+        
+        .result-stat-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .result-stat-unit {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-top: 2px;
+        }
+        
+        .performance-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        .badge-excellent {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+        
+        .badge-good {
+            background: rgba(0, 217, 255, 0.2);
+            color: var(--accent-primary);
+        }
+        
+        .badge-average {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+        
+        .badge-practice {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--error);
+        }
+        
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .sidebar {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .card {
+                height: 100%;
+            }
+            
+            .typing-container {
+                min-height: 400px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .header {
+                margin-bottom: 30px;
+            }
+            
+            .sidebar {
+                grid-template-columns: 1fr;
+            }
+            
+            .time-selector {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .typing-container {
+                padding: 20px;
+                min-height: 380px;
+            }
+            
+            .text-display {
+                min-height: 140px;
+                font-size: 1rem;
+                line-height: 1.8;
+            }
+            
+            .input-area {
+                padding: 15px;
+                font-size: 1rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+                padding: 14px 24px;
+            }
+            
+            .result-content {
+                padding: 30px 20px;
+            }
+            
+            .result-stats {
+                gap: 12px;
+            }
+            
+            .result-stat {
+                padding: 18px;
+            }
+            
+            .result-stat-value {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .header p {
+                font-size: 0.85rem;
+            }
+            
+            .logo-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.5rem;
+            }
+            
+            .time-selector {
+                gap: 8px;
+            }
+            
+            .time-btn {
+                padding: 12px 8px;
+                font-size: 0.85rem;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .card-title {
+                font-size: 0.75rem;
+                margin-bottom: 15px;
+            }
+            
+            .stat-item {
+                padding: 15px;
+            }
+            
+            .stat-label {
+                font-size: 0.7rem;
+            }
+            
+            .stat-value {
+                font-size: 1.5rem;
+            }
+            
+            .typing-container {
+                padding: 18px;
+                min-height: 350px;
+            }
+            
+            .text-display {
+                font-size: 0.95rem;
+                min-height: 120px;
+            }
+            
+            .btn {
+                padding: 13px 20px;
+                font-size: 0.85rem;
+                min-width: 120px;
+            }
+            
+            .result-content {
+                padding: 25px 18px;
+            }
+            
+            .result-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+            
+            .result-content h2 {
+                font-size: 1.6rem;
+            }
+            
+            .result-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .result-stats {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .result-stat {
+                padding: 16px;
+            }
+            
+            .result-stat-value {
+                font-size: 1.8rem;
+            }
+            
+            .performance-badge {
+                font-size: 0.85rem;
+                padding: 7px 16px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .container {
+                padding: 15px 10px;
+            }
+            
+            .typing-container {
+                padding: 15px;
+            }
+            
+            .text-display {
+                font-size: 0.9rem;
+            }
+            
+            .input-area {
+                font-size: 0.95rem;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">⚡</div>
+            </div>
+            <h1>TypingMaster Pro</h1>
+            <p>Advanced Speed & Accuracy Testing Platform</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="card">
+                    <div class="card-title">
+                        <span>⏱</span> Test Duration
+                    </div>
+                    <div class="time-selector">
+                        <button class="time-btn active" data-time="60">
+                            <span>1 Min</span>
+                        </button>
+                        <button class="time-btn" data-time="120">
+                            <span>2 Min</span>
+                        </button>
+                        <button class="time-btn" data-time="300">
+                            <span>5 Min</span>
+                        </button>
+                        <button class="time-btn" data-time="600">
+                            <span>10 Min</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-title">
+                        <span>📊</span> Live Statistics
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-label">
+                                <span>⏳</span> Time Remaining
+                            </div>
+                            <div class="stat-value" id="timeLeft">60s</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">
+                                <span>⚡</span> Words Per Minute
+                            </div>
+                            <div class="stat-value" id="wpm">0</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">
+                                <span>🎯</span> Accuracy
+                            </div>
+                            <div class="stat-value" id="accuracy">100%</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">
+                                <span>✍️</span> Characters Typed
+                            </div>
+                            <div class="stat-value" id="charCount">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="typing-section">
+                <div class="typing-container" id="typingContainer">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="text-display" id="textDisplay"></div>
+                    <textarea 
+                        class="input-area" 
+                        id="inputArea" 
+                        placeholder="Press START TEST to begin typing challenge..."
+                        disabled
+                        rows="4"
+                        spellcheck="false"
+                        autocomplete="off"
+                        autocorrect="off"
+                        autocapitalize="off"
+                    ></textarea>
+                </div>
+                
+                <div class="controls">
+                    <button class="btn btn-primary" id="startBtn">
+                        <span>🚀 Start Test</span>
+                    </button>
+                    <button class="btn btn-secondary" id="resetBtn">
+                        <span>🔄 Reset</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="result-modal" id="resultModal">
+        <div class="result-content">
+            <div class="result-header">
+                <div class="result-icon">🏆</div>
+                <h2>Test Complete!</h2>
+                <p class="result-subtitle">Here's your performance summary</p>
+            </div>
+            
+            <div class="result-stats">
+                <div class="result-stat">
+                    <div class="result-stat-label">Words Per Minute</div>
+                    <div class="result-stat-value" id="finalWpm">0</div>
+                    <div class="result-stat-unit">WPM</div>
+                </div>
+                <div class="result-stat">
+                    <div class="result-stat-label">Accuracy</div>
+                    <div class="result-stat-value" id="finalAccuracy">0%</div>
+                    <div class="result-stat-unit"></div>
+                </div>
+                <div class="result-stat">
+                    <div class="result-stat-label">Correct Characters</div>
+                    <div class="result-stat-value" id="finalChars">0</div>
+                    <div class="result-stat-unit">chars</div>
+                </div>
+                <div class="result-stat">
+                    <div class="result-stat-label">Total Errors</div>
+                    <div class="result-stat-value" id="finalErrors">0</div>
+                    <div class="result-stat-unit">errors</div>
+                </div>
+            </div>
+            
+            <div style="text-align: center;">
+                <div id="performanceBadge"></div>
+                <div style="margin-top: 25px;">
+                    <button class="btn btn-primary" onclick="closeModal()">
+                        <span>Try Again</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const paragraphs = [
+                "Technology has fundamentally transformed the landscape of modern communication and commerce. From artificial intelligence revolutionizing healthcare diagnostics to blockchain technology reshaping financial systems, innovation continues to accelerate at an unprecedented pace. The digital transformation has created new opportunities for global collaboration while simultaneously presenting unique challenges in data privacy and cybersecurity.",
+                "The art of programming requires both logical thinking and creative problem-solving abilities. Developers must balance performance optimization with code readability while maintaining scalability for future growth. Modern software engineering emphasizes clean architecture, comprehensive testing, and continuous integration to deliver robust applications that meet user expectations.",
+                "Environmental sustainability has become a critical priority for governments and corporations worldwide. Climate change mitigation strategies include transitioning to renewable energy sources, implementing circular economy principles, and investing in carbon capture technologies. Individual actions, when multiplied across billions of people, can create meaningful impact in preserving our planet for future generations.",
+                "The human brain processes approximately eleven million bits of information per second, yet our conscious mind can only handle about forty bits. This remarkable organ contains roughly eighty-six billion neurons, each forming thousands of connections with other neurons. Understanding neuroscience helps us optimize learning strategies, improve memory retention, and develop more effective educational methodologies.",
+                "Entrepreneurship demands resilience, adaptability, and unwavering determination to transform innovative ideas into successful ventures. Building a startup requires strategic planning, market research, and the ability to pivot when initial hypotheses prove incorrect. Successful founders embrace failure as a learning opportunity and maintain focus on creating genuine value for their customers.",
+                "Literature serves as a mirror reflecting society's values, struggles, and aspirations across different time periods and cultures. Classic novels provide timeless insights into human nature, while contemporary works address modern issues such as identity, technology, and social justice. Reading diversifies perspectives and enhances empathy by allowing us to experience life through different lenses.",
+                "Physical fitness encompasses cardiovascular health, muscular strength, flexibility, and mental well-being. Regular exercise releases endorphins that improve mood and reduce stress while building resilience against various chronic diseases. Proper nutrition fuels the body with essential vitamins, minerals, and macronutrients necessary for optimal performance and recovery.",
+                "Cryptocurrency and decentralized finance represent paradigm shifts in how we conceptualize money and financial transactions. Blockchain technology enables trustless peer-to-peer exchanges, removing intermediaries and reducing transaction costs. However, this emerging ecosystem faces regulatory challenges, scalability concerns, and environmental impacts that must be addressed for widespread adoption.",
+                "Artificial intelligence and machine learning algorithms are increasingly integrated into everyday applications, from recommendation systems to autonomous vehicles. These technologies analyze vast datasets to identify patterns and make predictions with remarkable accuracy. Ethical considerations regarding algorithmic bias, transparency, and accountability become paramount as AI systems assume greater decision-making responsibilities.",
+                "Space exploration continues to capture human imagination as private companies join government agencies in pushing the boundaries of what's possible. Establishing sustainable colonies on Mars, mining asteroids for resources, and developing reusable rocket technology represent humanity's next frontier. These ambitious endeavors require unprecedented international cooperation and technological innovation."
+            ];
+            
+            let selectedTime = 60;
+            let timeLeft = 60;
+            let timer = null;
+            let isTestActive = false;
+            let currentParagraph = '';
+            let currentIndex = 0;
+            let correctChars = 0;
+            let incorrectChars = 0;
+            let totalCharsTyped = 0;
+            let startTime = null;
+            let errorPositions = new Set();
+            
+            const timeButtons = document.querySelectorAll('.time-btn');
+            const startBtn = document.getElementById('startBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const inputArea = document.getElementById('inputArea');
+            const textDisplay = document.getElementById('textDisplay');
+            const timeLeftDisplay = document.getElementById('timeLeft');
+            const wpmDisplay = document.getElementById('wpm');
+            const accuracyDisplay = document.getElementById('accuracy');
+            const charCountDisplay = document.getElementById('charCount');
+            const progressFill = document.getElementById('progressFill');
+            const typingContainer = document.getElementById('typingContainer');
+            const resultModal = document.getElementById('resultModal');
+        let timeLeft = selectedTime;
+        let timer = null;
+        let isTestActive = false;
+        let currentParagraph = '';
+        let currentIndex = 0;
+        let correctChars = 0;
+        let incorrectChars = 0;
+        let totalCharsTyped = 0;
+        let startTime = null;
+        let errorPositions = new Set();
+        
+        const timeButtons = document.querySelectorAll('.time-btn');
+        const startBtn = document.getElementById('startBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const inputArea = document.getElementById('inputArea');
+        const textDisplay = document.getElementById('textDisplay');
+        const timeLeftDisplay = document.getElementById('timeLeft');
+        const wpmDisplay = document.getElementById('wpm');
+        const accuracyDisplay = document.getElementById('accuracy');
+        const charCountDisplay = document.getElementById('charCount');
+        const progressFill = document.getElementById('progressFill');
+        const typingContainer = document.getElementById('typingContainer');
+        const resultModal = document.getElementById('resultModal');
+        
+        // Time selector
+        timeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (isTestActive) return;
+                
+                timeButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                selectedTime = parseInt(btn.dataset.time);
+                timeLeft = selectedTime;
+                timeLeftDisplay.textContent = formatTime(timeLeft);
+            });
+        });
+        
+        startBtn.addEventListener('click', startTest);
+        resetBtn.addEventListener('click', resetTest);
+        inputArea.addEventListener('input', handleInput);
+        
+        // Prevent paste
+        inputArea.addEventListener('paste', (e) => {
+            e.preventDefault();
+        });
+        
+        function startTest() {
+            if (isTestActive) return;
+            
+            isTestActive = true;
+            startBtn.disabled = true;
+            inputArea.disabled = false;
+            inputArea.value = '';
+            inputArea.focus();
+            inputArea.placeholder = 'Start typing...';
+            
+            typingContainer.classList.add('active');
+            
+            currentParagraph = paragraphs[Math.floor(Math.random() * paragraphs.length)];
+            currentIndex = 0;
+            correctChars = 0;
+            incorrectChars = 0;
+            totalCharsTyped = 0;
+            errorPositions.clear();
+            
+            displayText();
+            startTime = Date.now();
+            
+            timer = setInterval(() => {
+                timeLeft--;
+                timeLeftDisplay.textContent = formatTime(timeLeft);
+                updateProgress();
+                
+                if (timeLeft <= 0) {
+                    endTest();
+                }
+            }, 1000);
+        }
+        
+        function resetTest() {
+            clearInterval(timer);
+            isTestActive = false;
+            startBtn.disabled = false;
+            inputArea.disabled = true;
+            inputArea.value = '';
+            inputArea.placeholder = 'Press START TEST to begin typing challenge...';
+            currentIndex = 0;
+            correctChars = 0;
+            incorrectChars = 0;
+            totalCharsTyped = 0;
+            errorPositions.clear();
+            timeLeft = selectedTime;
+            
+            typingContainer.classList.remove('active');
+            
+            timeLeftDisplay.textContent = formatTime(timeLeft);
+            wpmDisplay.textContent = '0';
+            accuracyDisplay.textContent = '100%';
+            charCountDisplay.textContent = '0';
+            progressFill.style.width = '0%';
+            textDisplay.innerHTML = '';
+        }
+        
+        function handleInput(e) {
+            if (!isTestActive) return;
+            
+            const typed = e.target.value;
+            currentIndex = typed.length;
+            totalCharsTyped = typed.length;
+            
+            correctChars = 0;
+            incorrectChars = 0;
+            errorPositions.clear();
+            
+            let html = '';
+            for (let i = 0; i < currentParagraph.length; i++) {
+                if (i < typed.length) {
+                    if (typed[i] === currentParagraph[i]) {
+                        html += `<span class="correct">${escapeHtml(currentParagraph[i])}</span>`;
+                        correctChars++;
+                    } else {
+                        html += `<span class="incorrect">${escapeHtml(currentParagraph[i])}</span>`;
+                        incorrectChars++;
+                        errorPositions.add(i);
+                    }
+                } else if (i === typed.length) {
+                    html += `<span class="current">${escapeHtml(currentParagraph[i])}</span>`;
+                } else {
+                    html += `<span>${escapeHtml(currentParagraph[i])}</span>`;
+                }
+            }
+            
+            textDisplay.innerHTML = html;
+            updateStats();
+            
+            // Check if completed
+            if (typed.length >= currentParagraph.length) {
+                endTest();
+            }
+        }
+        
+        function updateStats() {
+            const timeElapsed = (selectedTime - timeLeft);
+            const minutes = timeElapsed / 60;
+            
+            // Calculate WPM (words = chars / 5)
+            const wordsTyped = correctChars / 5;
+            const wpm = minutes > 0 ? Math.round(wordsTyped / minutes) : 0;
+            
+            // Calculate accuracy
+            const totalChars = correctChars + incorrectChars;
+            const accuracy = totalChars > 0 ? Math.round((correctChars / totalChars) * 100) : 100;
+            
+            wpmDisplay.textContent = wpm;
+            accuracyDisplay.textContent = accuracy + '%';
+            charCountDisplay.textContent = correctChars;
+            
+            // Update progress bar
+            const progress = (totalCharsTyped / currentParagraph.length) * 100;
+            progressFill.style.width = Math.min(progress, 100) + '%';
+        }
+        
+        function updateProgress() {
+            // Visual progress update based on time
+            const timeProgress = ((selectedTime - timeLeft) / selectedTime) * 100;
+        }
+        
+        function endTest() {
+            clearInterval(timer);
+            isTestActive = false;
+            inputArea.disabled = true;
+            typingContainer.classList.remove('active');
+            
+            const timeElapsed = (selectedTime - timeLeft);
+            const minutes = timeElapsed / 60;
+            
+            // Final calculations
+            const wordsTyped = correctChars / 5;
+            const wpm = minutes > 0 ? Math.round(wordsTyped / minutes) : 0;
+            const totalChars = correctChars + incorrectChars;
+            const accuracy = totalChars > 0 ? Math.round((correctChars / totalChars) * 100) : 100;
+            
+            // Update modal
+            document.getElementById('finalWpm').textContent = wpm;
+            document.getElementById('finalAccuracy').textContent = accuracy + '%';
+            document.getElementById('finalChars').textContent = correctChars;
+            document.getElementById('finalErrors').textContent = incorrectChars;
+            
+            // Performance badge
+            const badge = getPerformanceBadge(wpm, accuracy);
+            document.getElementById('performanceBadge').innerHTML = badge;
+            
+            resultModal.style.display = 'flex';
+        }
+        
+        function getPerformanceBadge(wpm, accuracy) {
+            let badgeClass = '';
+            let badgeText = '';
+            
+            if (wpm >= 80 && accuracy >= 95) {
+                badgeClass = 'badge-excellent';
+                badgeText = '🌟 Excellent Performance!';
+            } else if (wpm >= 60 && accuracy >= 90) {
+                badgeClass = 'badge-good';
+                badgeText = '👍 Great Job!';
+            } else if (wpm >= 40 && accuracy >= 80) {
+                badgeClass = 'badge-average';
+                badgeText = '📈 Good Progress!';
+            } else {
+                badgeClass = 'badge-practice';
+                badgeText = '💪 Keep Practicing!';
+            }
+            
+            return `<span class="performance-badge ${badgeClass}">${badgeText}</span>`;
+        }
+        
+        function displayText() {
+            textDisplay.innerHTML = currentParagraph.split('').map((char, i) => 
+                i === 0 ? `<span class="current">${escapeHtml(char)}</span>` : `<span>${escapeHtml(char)}</span>`
+            ).join('');
+        }
+        
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return mins > 0 ? `${mins}m ${secs}s` : `${secs}s`;
+        }
+        
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;',
+                ' ': '&nbsp;'
+            };
+            return text.replace(/[&<>"' ]/g, m => map[m]);
+        }
+        
+        function closeModal() {
+            resultModal.style.display = 'none';
+            resetTest();
+        }
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (resultModal.style.display === 'flex') {
+                    closeModal();
+                } else if (isTestActive) {
+                    resetTest();
+                }
+            }
+        });
+        
+        // Initialize
+        timeLeftDisplay.textContent = formatTime(timeLeft);
+        })();
+    </script>
+</body>
+</html>, 1fr);
+            }
+            
+            .typing-container {
+                padding: 25px;
+            }
+            
+            .result-content {
+                padding: 35px 25px;
+            }
+            
+            .result-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .controls {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .logo-icon {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">⚡</div>
+            </div>
+            <h1>TypingMaster Pro</h1>
+            <p>Advanced Speed & Accuracy Testing Platform</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="card">
+                    <div class="card-title">
+                        <span>⏱</span> Test Duration
+                    </div>
+                    <div class="time-selector">
+                        <button class="time-btn active" data-time="60">
+                            <span>1 Min</span>
+                        </button>
+                        <button class="time-btn" data-time="120">
+                            <span>2 Min</span>
+                        </button>
+                        <button class="time-btn" data-time="300">
+                            <span>5 Min</span>
+                        </button>
+                        <button class="time-btn" data-time="600">
+                            <span>10 Min</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-title">
+                        <span>📊</span> Live Statistics
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-label">
+                                <span>⏳</span> Time Remaining
+                            </div>
+                            <div class="stat-value" id="timeLeft">60s</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">
+                                <span>⚡</span> Words Per Minute
+                            </div>
+                            <div class="stat-value" id="wpm">0</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">
+                                <span>🎯</span> Accuracy
+                            </div>
+                            <div class="stat-value" id="accuracy">100%</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">
+                                <span>✍️</span> Characters Typed
+                            </div>
+                            <div class="stat-value" id="charCount">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="typing-section">
+                <div class="typing-container" id="typingContainer">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="text-display" id="textDisplay"></div>
+                    <textarea 
+                        class="input-area" 
+                        id="inputArea" 
+                        placeholder="Press START TEST to begin typing challenge..."
+                        disabled
+                        rows="5"
+                        spellcheck="false"
+                        autocomplete="off"
+                        autocorrect="off"
+                        autocapitalize="off"
+                    ></textarea>
+                </div>
+                
+                <div class="controls">
+                    <button class="btn btn-primary" id="startBtn">
+                        <span>🚀 Start Test</span>
+                    </button>
+                    <button class="btn btn-secondary" id="resetBtn">
+                        <span>🔄 Reset</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="result-modal" id="resultModal">
+        <div class="result-content">
+            <div class="result-header">
+                <div class="result-icon">🏆</div>
+                <h2>Test Complete!</h2>
+                <p class="result-subtitle">Here's your performance summary</p>
+            </div>
+            
+            <div class="result-stats">
+                <div class="result-stat">
+                    <div class="result-stat-label">Words Per Minute</div>
+                    <div class="result-stat-value" id="finalWpm">0</div>
+                    <div class="result-stat-unit">WPM</div>
+                </div>
+                <div class="result-stat">
+                    <div class="result-stat-label">Accuracy</div>
+                    <div class="result-stat-value" id="finalAccuracy">0%</div>
+                    <div class="result-stat-unit"></div>
+                </div>
+                <div class="result-stat">
+                    <div class="result-stat-label">Correct Characters</div>
+                    <div class="result-stat-value" id="finalChars">0</div>
+                    <div class="result-stat-unit">chars</div>
+                </div>
+                <div class="result-stat">
+                    <div class="result-stat-label">Total Errors</div>
+                    <div class="result-stat-value" id="finalErrors">0</div>
+                    <div class="result-stat-unit">errors</div>
+                </div>
+            </div>
+            
+            <div style="text-align: center;">
+                <div id="performanceBadge"></div>
+                <div style="margin-top: 30px;">
+                    <button class="btn btn-primary" onclick="closeModal()">
+                        <span>Try Again</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const paragraphs = [
+            "Technology has fundamentally transformed the landscape of modern communication and commerce. From artificial intelligence revolutionizing healthcare diagnostics to blockchain technology reshaping financial systems, innovation continues to accelerate at an unprecedented pace. The digital transformation has created new opportunities for global collaboration while simultaneously presenting unique challenges in data privacy and cybersecurity.",
+            "The art of programming requires both logical thinking and creative problem-solving abilities. Developers must balance performance optimization with code readability while maintaining scalability for future growth. Modern software engineering emphasizes clean architecture, comprehensive testing, and continuous integration to deliver robust applications that meet user expectations.",
+            "Environmental sustainability has become a critical priority for governments and corporations worldwide. Climate change mitigation strategies include transitioning to renewable energy sources, implementing circular economy principles, and investing in carbon capture technologies. Individual actions, when multiplied across billions of people, can create meaningful impact in preserving our planet for future generations.",
+            "The human brain processes approximately eleven million bits of information per second, yet our conscious mind can only handle about forty bits. This remarkable organ contains roughly eighty-six billion neurons, each forming thousands of connections with other neurons. Understanding neuroscience helps us optimize learning strategies, improve memory retention, and develop more effective educational methodologies.",
+            "Entrepreneurship demands resilience, adaptability, and unwavering determination to transform innovative ideas into successful ventures. Building a startup requires strategic planning, market research, and the ability to pivot when initial hypotheses prove incorrect. Successful founders embrace failure as a learning opportunity and maintain focus on creating genuine value for their customers.",
+            "Literature serves as a mirror reflecting society's values, struggles, and aspirations across different time periods and cultures. Classic novels provide timeless insights into human nature, while contemporary works address modern issues such as identity, technology, and social justice. Reading diversifies perspectives and enhances empathy by allowing us to experience life through different lenses.",
+            "Physical fitness encompasses cardiovascular health, muscular strength, flexibility, and mental well-being. Regular exercise releases endorphins that improve mood and reduce stress while building resilience against various chronic diseases. Proper nutrition fuels the body with essential vitamins, minerals, and macronutrients necessary for optimal performance and recovery.",
+            "Cryptocurrency and decentralized finance represent paradigm shifts in how we conceptualize money and financial transactions. Blockchain technology enables trustless peer-to-peer exchanges, removing intermediaries and reducing transaction costs. However, this emerging ecosystem faces regulatory challenges, scalability concerns, and environmental impacts that must be addressed for widespread adoption.",
+            "Artificial intelligence and machine learning algorithms are increasingly integrated into everyday applications, from recommendation systems to autonomous vehicles. These technologies analyze vast datasets to identify patterns and make predictions with remarkable accuracy. Ethical considerations regarding algorithmic bias, transparency, and accountability become paramount as AI systems assume greater decision-making responsibilities.",
+            "Space exploration continues to capture human imagination as private companies join government agencies in pushing the boundaries of what's possible. Establishing sustainable colonies on Mars, mining asteroids for resources, and developing reusable rocket technology represent humanity's next frontier. These ambitious endeavors require unprecedented international cooperation and technological innovation."
+        ];
+        
+        let selectedTime = 60;
+        let timeLeft = selectedTime;
+        let timer = null;
+        let isTestActive = false;
+        let currentParagraph = '';
+        let currentIndex = 0;
+        let correctChars = 0;
+        let incorrectChars = 0;
+        let totalCharsTyped = 0;
+        let startTime = null;
+        let errorPositions = new Set();
+        
+        const timeButtons = document.querySelectorAll('.time-btn');
+        const startBtn = document.getElementById('startBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const inputArea = document.getElementById('inputArea');
+        const textDisplay = document.getElementById('textDisplay');
+        const timeLeftDisplay = document.getElementById('timeLeft');
+        const wpmDisplay = document.getElementById('wpm');
+        const accuracyDisplay = document.getElementById('accuracy');
+        const charCountDisplay = document.getElementById('charCount');
+        const progressFill = document.getElementById('progressFill');
+        const typingContainer = document.getElementById('typingContainer');
+        const resultModal = document.getElementById('resultModal');
+        
+        // Time selector
+        timeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (isTestActive) return;
+                
+                timeButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                selectedTime = parseInt(btn.dataset.time);
+                timeLeft = selectedTime;
+                timeLeftDisplay.textContent = formatTime(timeLeft);
+            });
+        });
+        
+        startBtn.addEventListener('click', startTest);
+        resetBtn.addEventListener('click', resetTest);
+        inputArea.addEventListener('input', handleInput);
+        
+        // Prevent paste
+        inputArea.addEventListener('paste', (e) => {
+            e.preventDefault();
+        });
+        
+        function startTest() {
+            if (isTestActive) return;
+            
+            isTestActive = true;
+            startBtn.disabled = true;
+            inputArea.disabled = false;
+            inputArea.value = '';
+            inputArea.focus();
+            inputArea.placeholder = 'Start typing...';
+            
+            typingContainer.classList.add('active');
+            
+            currentParagraph = paragraphs[Math.floor(Math.random() * paragraphs.length)];
+            currentIndex = 0;
+            correctChars = 0;
+            incorrectChars = 0;
+            totalCharsTyped = 0;
+            errorPositions.clear();
+            
+            displayText();
+            startTime = Date.now();
+            
+            timer = setInterval(() => {
+                timeLeft--;
+                timeLeftDisplay.textContent = formatTime(timeLeft);
+                updateProgress();
+                
+                if (timeLeft <= 0) {
+                    endTest();
+                }
+            }, 1000);
+        }
+        
+        function resetTest() {
+            clearInterval(timer);
+            isTestActive = false;
+            startBtn.disabled = false;
+            inputArea.disabled = true;
+            inputArea.value = '';
+            inputArea.placeholder = 'Press START TEST to begin typing challenge...';
+            currentIndex = 0;
+            correctChars = 0;
+            incorrectChars = 0;
+            totalCharsTyped = 0;
+            errorPositions.clear();
+            timeLeft = selectedTime;
+            
+            typingContainer.classList.remove('active');
+            
+            timeLeftDisplay.textContent = formatTime(timeLeft);
+            wpmDisplay.textContent = '0';
+            accuracyDisplay.textContent = '100%';
+            charCountDisplay.textContent = '0';
+            progressFill.style.width = '0%';
+            textDisplay.innerHTML = '';
+        }
+        
+        function handleInput(e) {
+            if (!isTestActive) return;
+            
+            const typed = e.target.value;
+            currentIndex = typed.length;
+            totalCharsTyped = typed.length;
+            
+            correctChars = 0;
+            incorrectChars = 0;
+            errorPositions.clear();
+            
+            let html = '';
+            for (let i = 0; i < currentParagraph.length; i++) {
+                if (i < typed.length) {
+                    if (typed[i] === currentParagraph[i]) {
+                        html += `<span class="correct">${escapeHtml(currentParagraph[i])}</span>`;
+                        correctChars++;
+                    } else {
+                        html += `<span class="incorrect">${escapeHtml(currentParagraph[i])}</span>`;
+                        incorrectChars++;
+                        errorPositions.add(i);
+                    }
+                } else if (i === typed.length) {
+                    html += `<span class="current">${escapeHtml(currentParagraph[i])}</span>`;
+                } else {
+                    html += `<span>${escapeHtml(currentParagraph[i])}</span>`;
+                }
+            }
+            
+            textDisplay.innerHTML = html;
+            updateStats();
+            
+            // Check if completed
+            if (typed.length >= currentParagraph.length) {
+                endTest();
+            }
+        }
+        
+        function updateStats() {
+            const timeElapsed = (selectedTime - timeLeft);
+            const minutes = timeElapsed / 60;
+            
+            // Calculate WPM (words = chars / 5)
+            const wordsTyped = correctChars / 5;
+            const wpm = minutes > 0 ? Math.round(wordsTyped / minutes) : 0;
+            
+            // Calculate accuracy
+            const totalChars = correctChars + incorrectChars;
+            const accuracy = totalChars > 0 ? Math.round((correctChars / totalChars) * 100) : 100;
+            
+            wpmDisplay.textContent = wpm;
+            accuracyDisplay.textContent = accuracy + '%';
+            charCountDisplay.textContent = correctChars;
+            
+            // Update progress bar
+            const progress = (totalCharsTyped / currentParagraph.length) * 100;
+            progressFill.style.width = Math.min(progress, 100) + '%';
+        }
+        
+        function updateProgress() {
+            // Visual progress update based on time
+            const timeProgress = ((selectedTime - timeLeft) / selectedTime) * 100;
+        }
+        
+        function endTest() {
+            clearInterval(timer);
+            isTestActive = false;
+            inputArea.disabled = true;
+            typingContainer.classList.remove('active');
+            
+            const timeElapsed = (selectedTime - timeLeft);
+            const minutes = timeElapsed / 60;
+            
+            // Final calculations
+            const wordsTyped = correctChars / 5;
+            const wpm = minutes > 0 ? Math.round(wordsTyped / minutes) : 0;
+            const totalChars = correctChars + incorrectChars;
+            const accuracy = totalChars > 0 ? Math.round((correctChars / totalChars) * 100) : 100;
+            
+            // Update modal
+            document.getElementById('finalWpm').textContent = wpm;
+            document.getElementById('finalAccuracy').textContent = accuracy + '%';
+            document.getElementById('finalChars').textContent = correctChars;
+            document.getElementById('finalErrors').textContent = incorrectChars;
+            
+            // Performance badge
+            const badge = getPerformanceBadge(wpm, accuracy);
+            document.getElementById('performanceBadge').innerHTML = badge;
+            
+            resultModal.style.display = 'flex';
+        }
+        
+        function getPerformanceBadge(wpm, accuracy) {
+            let badgeClass = '';
+            let badgeText = '';
+            
+            if (wpm >= 80 && accuracy >= 95) {
+                badgeClass = 'badge-excellent';
+                badgeText = '🌟 Excellent Performance!';
+            } else if (wpm >= 60 && accuracy >= 90) {
+                badgeClass = 'badge-good';
+                badgeText = '👍 Great Job!';
+            } else if (wpm >= 40 && accuracy >= 80) {
+                badgeClass = 'badge-average';
+                badgeText = '📈 Good Progress!';
+            } else {
+                badgeClass = 'badge-practice';
+                badgeText = '💪 Keep Practicing!';
+            }
+            
+            return `<span class="performance-badge ${badgeClass}">${badgeText}</span>`;
+        }
+        
+        function displayText() {
+            textDisplay.innerHTML = currentParagraph.split('').map((char, i) => 
+                i === 0 ? `<span class="current">${escapeHtml(char)}</span>` : `<span>${escapeHtml(char)}</span>`
+            ).join('');
+        }
+        
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return mins > 0 ? `${mins}m ${secs}s` : `${secs}s`;
+        }
+        
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;',
+                ' ': '&nbsp;'
+            };
+            return text.replace(/[&<>"' ]/g, m => map[m]);
+        }
+        
+        function closeModal() {
+            resultModal.style.display = 'none';
+            resetTest();
+        }
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (resultModal.style.display === 'flex') {
+                    closeModal();
+                } else if (isTestActive) {
+                    resetTest();
+                }
+            }
+        });
+        
+        // Initialize
+        timeLeftDisplay.textContent = formatTime(timeLeft);
+    </script>
+</body>
+</html>
